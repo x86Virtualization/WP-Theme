@@ -1,3 +1,3 @@
 <?php
 
-require_once('./build/index.html');
+require_once( get_stylesheet_directory() . '/build/index.html' );
