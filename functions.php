@@ -7,6 +7,9 @@ function themes_dir_add_rewrites() {
  
   global $wp_rewrite;
   $new_non_wp_rules = array(
+	'static/css/(.*)'       => 'wp-content/themes/'. $theme_name . '/build/static/css/$1',
+	'static/js/(.*)'       => 'wp-content/themes/'. $theme_name . '/build/static/js/$1',
+	'static/media/(.*)'       => 'wp-content/themes/'. $theme_name . '/build/static/media/$1',
   	'static/(.*)'       => 'wp-content/themes/'. $theme_name . '/build/static/$1',
     'build/(.*)'       => 'wp-content/themes/'. $theme_name . '/build/$1',
     'src/(.*)'        => 'wp-content/themes/'. $theme_name . '/src/$1',
