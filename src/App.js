@@ -25,7 +25,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to x86 Virtualization</h1>
+          <h1 className="App-title"><a href="/">Welcome to x86 Virtualization</a></h1>
         </header>
         <div className="App-intro">
           <h2>Recent Blog Posts:</h2>
