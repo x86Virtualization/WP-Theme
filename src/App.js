@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { render } from 'react-dom'; // importing render from ReactDOM
 import logo from './logo.svg';
 import './App.css';
 
@@ -27,10 +28,15 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title"><a href="/">Welcome to x86 Virtualization</a></h1>
         </header>
-        <div className="App-intro">
-          <h2>Recent Blog Posts:</h2>
-          {posts}
-        </div>
+        <div id="content">
+
+           <Switch>
+
+               <Route exact path={CelestialSettings.path} component={Posts} /> // the root path
+
+           </Switch>
+
+       </div>
       </div>
     );
   }
@@ -52,5 +58,23 @@ class Posts extends Component {
     );
   }
 }
+
+// React Router
+
+const routes = (
+
+   <Router>
+
+       <Route path="/" component={App} />
+
+   </Router>
+
+);
+
+render( // rendering to the DOM by replacing #page with the root React component
+
+   (routes), document.getElementById('page') // rendering the route
+
+);
 
 export default App;
