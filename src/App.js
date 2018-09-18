@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { render } from 'react-dom'; // importing render from ReactDOM
+// import { render } from 'react-dom'; // importing render from ReactDOM
 import logo from './logo.svg';
 import './App.css';
 
@@ -9,6 +9,7 @@ class App extends Component {
 
     this.state = {
       posts: [],
+      author: null
     };
   }
 
@@ -29,13 +30,8 @@ class App extends Component {
           <h1 className="App-title"><a href="/">Welcome to x86 Virtualization</a></h1>
         </header>
         <div id="content">
-
-           <Switch>
-
-               <Route exact path={CelestialSettings.path} component={Posts} /> // the root path
-
-           </Switch>
-
+          <h2>Recently Published Blog Posts</h2>
+          {posts}
        </div>
       </div>
     );
@@ -45,10 +41,17 @@ class App extends Component {
 class Posts extends Component {
   render(){
 
-    console.log(this.props.posts);
-
     const listPosts = this.props.posts.map((post) =>
-      <li key={post.id}><h3><a href={post.slug}>{post.title.rendered}</a></h3><p className="body" dangerouslySetInnerHTML={{__html: post.excerpt.rendered }}></p></li>
+      <li key={post.id}>
+        <h3>
+          <a href={post.slug}>{post.title.rendered}</a>
+        </h3>
+        <p className="details">
+          <div>Published: <span dangerouslySetInnerHTML={{__html: post.date }}></span></div>
+          <Author post={post} />
+        </p>
+        <p className="body" dangerouslySetInnerHTML={{__html: post.excerpt.rendered }}></p>
+      </li>
     );
 
     return (
@@ -59,22 +62,33 @@ class Posts extends Component {
   }
 }
 
-// React Router
+class Author extends Component {
+  constructor(props) {
+    super(props);
 
-const routes = (
+    this.state = {
+      author: null
+    };
+  }
 
-   <Router>
+  componentDidMount() {
+    // console.log(this.props.post._links.author[0].href);
+    /* TODO: Adjust for multiple Authors */
+    fetch(this.props.post._links.author[0].href)
+      .then(response => response.json())
+      .then(data => this.setState({ author: data }));
+  }
 
-       <Route path="/" component={App} />
+  render(){
 
-   </Router>
+    const author = ( this.state.author !== null )?<div><span>By: </span><span key={this.state.author.id}>{this.state.author.name}</span></div>:null;
 
-);
-
-render( // rendering to the DOM by replacing #page with the root React component
-
-   (routes), document.getElementById('page') // rendering the route
-
-);
+    return(
+      <span>
+        {author}
+      </span>
+      );
+  }
+}
 
 export default App;
