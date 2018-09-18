@@ -7,6 +7,8 @@
  * @since WP-Theme 1.1.6
  */
 
+add_theme_support( 'post-thumbnails' );
+
 add_action('generate_rewrite_rules', 'themes_dir_add_rewrites');
 
 function themes_dir_add_rewrites() {

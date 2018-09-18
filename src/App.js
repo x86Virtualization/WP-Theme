@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import Author from './components/Author';
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -46,10 +48,10 @@ class Posts extends Component {
         <h3>
           <a href={post.slug}>{post.title.rendered}</a>
         </h3>
-        <p className="details">
-          <div>Published: <span dangerouslySetInnerHTML={{__html: post.date }}></span></div>
+        <div className="details">
+          <p>Published: <span dangerouslySetInnerHTML={{__html: post.date }}></span></p>
           <Author post={post} />
-        </p>
+        </div>
         <p className="body" dangerouslySetInnerHTML={{__html: post.excerpt.rendered }}></p>
       </li>
     );
@@ -59,35 +61,6 @@ class Posts extends Component {
         {listPosts}
       </ul>
     );
-  }
-}
-
-class Author extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      author: null
-    };
-  }
-
-  componentDidMount() {
-    // console.log(this.props.post._links.author[0].href);
-    /* TODO: Adjust for multiple Authors */
-    fetch(this.props.post._links.author[0].href)
-      .then(response => response.json())
-      .then(data => this.setState({ author: data }));
-  }
-
-  render(){
-
-    const author = ( this.state.author !== null )?<div><span>By: </span><span key={this.state.author.id}>{this.state.author.name}</span></div>:null;
-
-    return(
-      <span>
-        {author}
-      </span>
-      );
   }
 }
 
