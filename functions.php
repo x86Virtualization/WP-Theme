@@ -35,7 +35,7 @@ function themes_dir_add_rewrites() {
 function wpt_register_fields() {
     // Add Author Name
     register_rest_field( 'post',
-        'author_name',
+        'authorName',
         array(
             'get_callback'      => 'wpt_get_author_name',
             'update_callback'   => null,
@@ -44,7 +44,7 @@ function wpt_register_fields() {
     );
     // Add Featured Image
     register_rest_field( 'post',
-        'featured_image_src',
+        'featuredImageSrc',
         array(
             'get_callback'      => 'wpt_get_image_src',
             'update_callback'   => null,

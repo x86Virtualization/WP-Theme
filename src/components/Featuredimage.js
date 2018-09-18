@@ -1,17 +1,27 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 
 class Featuredimage extends Component {
+  render() {
+    const { post } = this.props;
 
-  render(){
+    let img = null;
 
-    const img = ( this.props.post.author_name !== undefined )?<span>By: {this.props.post.author_name}</span>:null;
+    if (post.featuredImageSrc !== undefined && post.featuredImageSrc.length > 0) {
+      img = <img src={post.featuredImageSrc} alt={post.title.rendered} />;
+    }
 
-    return(
+    return (
       <p>
         {img}
       </p>
-      );
+    );
   }
 }
+
+Featuredimage.propTypes = {
+  post: PropTypes.shape.isRequired,
+};
 
 export default Featuredimage;

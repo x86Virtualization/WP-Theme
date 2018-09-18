@@ -1,17 +1,26 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Author extends Component {
+  render() {
+    const { post } = this.props;
 
-  render(){
+    const author = (post.authorName !== undefined)
+      ? (
+        <span>
+        By:
+          {post.authorName}
+        </span>
+      ) : null;
 
-    const author = ( this.props.post.author_name !== undefined )?<span>By: {this.props.post.author_name}</span>:null;
-
-    return(
-      <p>
-        {author}
-      </p>
-      );
+    return (
+      <p>{author}</p>
+    );
   }
 }
+
+Author.propTypes = {
+  post: PropTypes.shape.isRequired,
+};
 
 export default Author;
