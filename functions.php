@@ -12,6 +12,7 @@ add_action('generate_rewrite_rules', 'themes_dir_add_rewrites');
 function themes_dir_add_rewrites() {
   $theme_name = next(explode('/themes/', get_stylesheet_directory()));
 
+  //Ensure the $wp_rewrite global is loaded
   global $wp_rewrite;
   $new_non_wp_rules = array(
   	'static/css/(.*)'       => 'wp-content/themes/'. $theme_name . '/build/static/css/$1',
@@ -23,6 +24,9 @@ function themes_dir_add_rewrites() {
     'public/(.*)'        => 'wp-content/themes/'. $theme_name . '/public/$1'
   );
   $wp_rewrite->non_wp_rules += $new_non_wp_rules;
+
+  //Call flush_rules() as a method of the $wp_rewrite object
+  $wp_rewrite->flush_rules( true );
 }
 
 // Add various fields to the JSON output
