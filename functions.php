@@ -28,7 +28,7 @@ function themes_dir_add_rewrites() {
   $wp_rewrite->non_wp_rules += $new_non_wp_rules;
 
   //Call flush_rules() as a method of the $wp_rewrite object
-  $wp_rewrite->flush_rules( true );
+  // $wp_rewrite->flush_rules( true );
 }
 
 // Add various fields to the JSON output
